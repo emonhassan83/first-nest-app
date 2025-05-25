@@ -21,6 +21,11 @@ export class BookService {
   }
 
   async findById(id: string): Promise<Book> {
+    const isValid = mongoose.isValidObjectId(id);
+    if (!isValid) {
+      throw new NotFoundException('Mongoose Invalid Id!');
+    }
+
     const book = await this.bookModel.findById(id);
     if (!book) {
       throw new NotFoundException('Book not found');
@@ -30,24 +35,24 @@ export class BookService {
 
   async updateById(id: string, book: Book): Promise<Book> {
     const updatedBook = await this.bookModel.findByIdAndUpdate(id, book, {
-        new: true,
-        runValidators: true,
-      });
-    
-      if (!updatedBook) {
-        throw new Error('Book not found');
-      }
-    
-      return updatedBook;
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedBook) {
+      throw new Error('Book not found');
+    }
+
+    return updatedBook;
   }
 
   async deleteById(id: string): Promise<Book> {
     const deleteBook = await this.bookModel.findByIdAndDelete(id);
-    
-      if (!deleteBook) {
-        throw new Error('Book not found');
-      }
-    
-      return deleteBook;
+
+    if (!deleteBook) {
+      throw new Error('Book not found');
+    }
+
+    return deleteBook;
   }
 }
