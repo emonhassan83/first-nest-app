@@ -9,7 +9,7 @@ export class AuthController {
 
   @Post('/signup')
   signUp(@Body() signUpDto: SignUpDto): Promise<{ token: string }> {
-    return this.authService.signUp(signUpDto);
+    return this.authService.signUp(signUpDto) as Promise<{ token: string }>;
   }
 
   @Post('/login')
