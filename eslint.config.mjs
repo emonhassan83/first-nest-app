@@ -40,7 +40,8 @@ export default tseslint.config(
       "prefer-promise-reject-errors": "off",
       "@typescript-eslint/prefer-promise-reject-errors": "off",
       "require-await": "off",
-    "@typescript-eslint/require-await": "off"
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/no-misused-promises": "off"
     },
   },
 );
