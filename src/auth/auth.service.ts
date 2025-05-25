@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   async signUp(signUpDto: SignUpDto) {
-    const { name, email, password } = signUpDto;
+    const { name, email, password, role } = signUpDto;
 
     const hashPassword = await bcrypt.hash(password, 12);
 
@@ -25,6 +25,7 @@ export class AuthService {
         name,
         email,
         password: hashPassword,
+        role
       });
   
       // generate token here
